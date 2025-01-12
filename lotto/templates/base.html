@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}로또 시스템{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body>
+    <header class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto">
+            <h1 class="text-lg font-bold">로또 시스템</h1>
+            <nav>
+                <a href="{% url 'my_tickets' %}" class="mr-4">내 티켓</a>
+                <a href="{% url 'purchase_ticket' %}" class="mr-4">로또 구매</a>
+                <a href="{% url 'statistics' %}" class="mr-4">통계</a>
+                {% if user.is_superuser %}
+                    <a href="{% url 'draw_numbers' %}">추첨</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto mt-8">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load custom_filters %}  <!-- custom_filters 필터 로드 -->
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">로또 통계</h1>
+    
+    {% for stat in stats %}
+    <div class="border rounded p-6 mb-6">
+        <h2 class="text-xl font-semibold mb-4">
+            {{ stat.draw_result.draw_number }}회 추첨 결과
+            <span class="text-gray-600 text-sm">({{ stat.draw_result.draw_date|date:"Y-m-d" }})</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-semibold mb-2">당첨 번호</h3>
+                <p class="text-lg">{{ stat.draw_result.winning_numbers }}</p>
+                <p class="text-gray-600">보너스: {{ stat.draw_result.bonus_number }}</p>
+            </div>
+            
+            <div>
+                <h3 class="font-semibold mb-2">판매 현황</h3>
+                <p>총 판매량: {{ stat.total_tickets }}장</p>
+                <p>자동: {{ stat.auto_tickets }}장 ({{ stat.auto_tickets|div:stat.total_tickets|mul:100|floatformat:1 }}%)</p>
+                <p>수동: {{ stat.manual_tickets }}장 ({{ stat.manual_tickets|div:stat.total_tickets|mul:100|floatformat:1 }}%)</p>
+            </div>
+            
+            <div class="md:col-span-2">
+                <h3 class="font-semibold mb-2">당첨 현황</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="border rounded p-3 text-center">
+                        <p class="font-bold">1등</p>
+                        <p>{{ stat.first_prize_winners }}명</p>
+                    </div>
+                    <div class="border rounded p-3 text-center">
+                        <p class="font-bold">2등</p>
+                        <p>{{ stat.second_prize_winners }}명</p>
+                    </div>
+                    <div class="border rounded p-3 text-center">
+                        <p class="font-bold">3등</p>
+                        <p>{{ stat.third_prize_winners }}명</p>
+                    </div>
+                    <div class="border rounded p-3 text-center">
+                        <p class="font-bold">4등</p>
+                        <p>{{ stat.fourth_prize_winners }}명</p>
+                    </div>
+                    <div class="border rounded p-3 text-center">
+                        <p class="font-bold">5등</p>
+                        <p>{{ stat.fifth_prize_winners }}명</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-gray-500">아직 추첨 결과가 없습니다.</p>
+    {% endfor %}
+</div>
+{% endblock %}

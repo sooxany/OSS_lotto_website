@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #4CAF50;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        a {
+            font-size: 18px;
+            color: #2196F3;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #1E88E5;
+        }
+
+        .footer {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Lotto!</h1>
+        <p>Choose an option:</p>
+        <ul>
+            <li><a href="{% url 'purchase_ticket' %}">Purchase a ticket</a></li>
+            <li><a href="{% url 'my_tickets' %}">My Tickets</a></li>
+            <li><a href="{% url 'draw_numbers' %}">Draw Numbers</a></li>
+            <li><a href="{% url 'statistics' %}">Statistics</a></li>
+        </ul>
+        <div class="footer">
+            <p>&copy; 2025 Lotto Inc. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

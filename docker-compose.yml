@@ -1,0 +1,16 @@
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      DEBUG: "True"
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: lotto_user
+      POSTGRES_PASSWORD: lotto_pass
+      POSTGRES_DB: lotto_db

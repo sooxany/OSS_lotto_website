@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">내 로또 티켓</h1>
+    
+    <div class="grid gap-4">
+        {% for ticket in tickets %}
+        <div class="border rounded p-4 {% if ticket.prize_rank %}bg-green-50{% endif %}">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="font-semibold">번호: {{ ticket.numbers }}</p>
+                    <p class="text-gray-600">구매일: {{ ticket.purchase_date|date:"Y-m-d H:i" }}</p>
+                    <p class="text-gray-600">추첨일: {{ ticket.draw_date|date:"Y-m-d" }}</p>
+                    <p>구매 방식: {{ ticket.get_ticket_type_display }}</p>
+                </div>
+                {% if ticket.status == 'CHECKED' %}
+                <div class="text-right">
+                    <p class="font-bold {% if ticket.prize_rank %}text-green-600{% endif %}">
+                        {% if ticket.prize_rank %}
+                            {{ ticket.prize_rank }}등 당첨
+                            <p class="text-sm">당첨금: {{ ticket.prize_amount|intcomma }}원</p>
+
+                        {% else %}
+                            낙첨
+                        {% endif %}
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-gray-500">구매한 티켓이 없습니다.</p>
+        {% endfor %}
+    </div>
+    
+    <a href="{% url 'purchase_ticket' %}" class="inline-block mt-6 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        새 티켓 구매하기
+    </a>
+</div>
+{% endblock %}

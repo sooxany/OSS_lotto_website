@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">추첨</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            당첨 번호 생성
+        </button>
+    </form>
+</div>
+{% endblock %}
